@@ -1,0 +1,226 @@
+-----Endpoint Buscar Token:
+https://360.nddprint.com/token
+
+-----Endpoint para login:
+https://360.nddprint.com/api/users/profile
+
+-----Retorno do POST para quando o token é inválido ou expira:
+{"message":"Authorization has been denied for this request."}
+
+-----Endpoint Criar políticas:
+https://360.nddprint.com/api/policies
+* Não precisa de authorization
+
+-----Endpoint consultar políticas:
+https://360.nddprint.com/odata/policies?language=pt-BR&$skip=0&$top=100&$orderby=policyName&$count=true
+* Necessita authorization
+
+-----Endpoint Update políticas:
+https://360.nddprint.com/api/policies/update
+* Necessita authorization
+
+-----Endpoint Deletar políticas:
+https://360.nddprint.com/api/policies/666/delete
+* Necessita authorization
+
+Parâmetros políticas:
+----------------------------------------------------------------------------------------
+***** Fazer um IF na criação da política verificando PolicyName. Caso já exista, o POST retorna: {"message":"@@360PolicyNameTaken","fieldName":"PolicyName"}
+
+"policyName":"String",
+
+"policyType":0 (Todas as Finalidades)
+"policyType":1 (Particular)
+"policyType":2 (Corporativo)
+
+jobType":1 (Impressão)
+jobType":2 (Cópia)
+jobType":5 (Envio de Fax)
+jobType":4 (Digitalização)
+
+"behaviorType":0 (permissão: Permitir)
+"behaviorType":1 (permissão: Notificar estação)
+"behaviorType":2 (permissão: Alertar)
+"behaviorType":3 (permissão: Não permitir)
+"behaviorType":4 (segurança: Imprimir)
+"behaviorType":5 (segurança: Não imprimir)
+"behaviorType":6 (conversão: Mono)
+"behaviorType":7 (conversão: Duplex)
+
+"enabled":true/false (habilita ou não a política após a criação)
+
+"notify":"true/false/null" (Notificar usuario da criação da política)
+
+"useDefaultNotificationMessage":true (habilita mensagem padrão da política)
+
+"customNotificationMessage":"RestriÃ§Ã£o de impressÃ£o." (mensagem padrão da política) Parametros: [LOGONNAME], [TOTALPAGES]
+
+"filters":[] (Propriedades específicas dos trabalhos onde a política será aplicada.)
+
+Filtros:
+    "value":{"simpleValue":"String"}, (FORA DO FILTERS: palavra ou valor a ser utilizada como filtro de Título de documento)
+    "value":{"simpleValue":1} (DENTRO DO FILTERS: Filtro Total de Páginas)
+
+    "operator":{"text":"360Contains","value":1}, (operador CONTÉM, o campo "value" é a posição dele na lista)
+    "operator":{"text":"360Equals","value":2} (Operador "IGUAL", o campo "value" é a posição dele na lista)
+    "operator":{"text":"360Different","value":3}
+    "operator":{"text":"360GreaterThan","value":4} (Operador "", o campo "value" é a posição dele na lista)
+    "operator":{"text":"360GreaterThanOrEqual","value":5} (Operador "", o campo "value" é a posição dele na lista)
+    "operator":{"text":"360LessThan","value":6} (Operador "", o campo "value" é a posição dele na lista)
+    "operator":{"text":"360LessThanOrEqual","value":7} (Operador "", o campo "value" é a posição dele na lista)
+    "operator":{"text":"360Interval","value":8} (Operador "", o campo "value" é a posição dele na lista)
+
+    "optionValue":{"text":"360Undefined","value":"0"}}, (Aplicativo Não definido, o campo "value" é a posição dele na lista)
+    "optionValue":{"text":"Microsoft Word","value":"1"} (Aplicativo Microsoft Word, o campo "value" é a posição dele na lista)
+    "optionValue":{"text":"Microsoft Excel","value":"2"} (Aplicativo Microsoft Excel, o campo "value" é a posição dele na lista)
+    "optionValue":{"text":"Microsoft PowerPoint","value":"3"} (Aplicativo Microsoft PowerPoint, o campo "value" é a posição dele na lista)
+    "optionValue":{"text":"Microsoft Internet Explorer","value":"4"} (Aplicativo Microsoft Internet Explorer, o campo "value" é a posição dele na lista)
+    "optionValue":{"text":"Microsoft Paint","value":"5"} (Aplicativo Microsoft Paint, o campo "value" é a posição dele na lista)
+    "optionValue":{"text":"Microsoft Outlook","value":"6"} (Aplicativo Microsoft Outlook, o campo "value" é a posição dele na lista)
+    "optionValue":{"text":"360Notepad","value":"7"} (Aplicativo 360Notepad, o campo "value" é a posição dele na lista)
+    "optionValue":{"text":"Corel Draw","value":"8"} (Aplicativo Corel Draw, o campo "value" é a posição dele na lista)
+    "optionValue":{"text":"PDF","value":"9"} (Aplicativo PDF, o campo "value" é a posição dele na lista)
+    "optionValue":{"text":"360No","value":"0"} (Valor NÃO, o campo "value" é a posição dele na lista)
+    "optionValue":{"text":"360Yes","value":"1"} (Valor SIM, o campo "value" é a posição dele na lista)
+    "optionValue":{"text":"360Monochromatic","value":"0"}
+    "optionValue":{"text":"360ColorUnitType","value":"1"}
+    "optionValue":{"text":"Unknown","value":"1"}
+    "optionValue":{"text":"Letter 8 1/2 x 11 in","value":"1"}
+    "optionValue":{"text":"Letter Small 8 1/2 x 11 in","value":"2"}
+    "optionValue":{"text":"Tabloid 11 x 17 in","value":"3"}
+    "optionValue":{"text":"Ledger 17 x 11 in","value":"4"}
+    "optionValue":{"text":"Legal 8 1/2 x 14 in","value":"5"}
+    "optionValue":{"text":"Statement 5 1/2 x 8 1/2 in","value":"6"}
+    "optionValue":{"text":"Executive 7 1/4 x 10 1/2 in","value":"7"}
+    "optionValue":{"text":"A3 297 x 420 mm","value":"8"}
+    "optionValue":{"text":"A4  210 x 297 mm","value":"9"}
+    "optionValue":{"text":"A4 Small 210 x 297 mm","value":"10"}
+    "optionValue":{"text":"A5 148 x 210 mm","value":"11"}
+    "optionValue":{"text":"B4 (JIS) 250 x 354","value":"12"}
+    "optionValue":{"text":"B5 (JIS) 182 x 257 mm","value":"13"}
+    "optionValue":{"text":"Folio 8 1/2 x 13 in","value":"14"}
+    "optionValue":{"text":"Quarto 215 x 275 mm","value":"15"}
+    "optionValue":{"text":"10 x 14 in","value":"16"}
+    "optionValue":{"text":"11 x 17 in","value":"17"}
+    "optionValue":{"text":"Note 8 1/2 x 11 in","value":"18"}
+    "optionValue":{"text":"Envelope #9 3 7/8 x 87/8","value":"19"}
+    "optionValue":{"text":"Envelope #10 4 1/8 x 9 1/2","value":"20"}
+    "optionValue":{"text":"Envelope #11 4 1/2 x 10 3/8","value":"21"}
+    "optionValue":{"text":"Envelope #12 4 \276 x 11","value":"22"}
+    "optionValue":{"text":"Envelope #14 5 x 11 1/2","value":"23"}
+    "optionValue":{"text":"C size sheet","value":"24"}
+    "optionValue":{"text":"D size sheet","value":"25"}
+    "optionValue":{"text":"E size sheet","value":"26"}
+    "optionValue":{"text":"Envelope DL 110 x 220 mm","value":"27"}
+    "optionValue":{"text":"Envelope C5 162 x 229 mm","value":"28"}
+    "optionValue":{"text":"Envelope C3 324 x 458 mm","value":"29"}
+    "optionValue":{"text":"Envelope C4 229 x 324 mm","value":"30"}
+    "optionValue":{"text":"Envelope C6 114 x 162 mm","value":"31"}
+    "optionValue":{"text":"Envelope C65 114 x 229 mm","value":"32"}
+    "optionValue":{"text":"Envelope B4 250 x 353 mm","value":"33"}
+    "optionValue":{"text":"Envelope B5 176 x 250 mm","value":"34"}
+    "optionValue":{"text":"Envelope B6 176 x 125 mm","value":"35"}
+    "optionValue":{"text":"Envelope 110 x 230 mm","value":"36"}
+    "optionValue":{"text":"Envelope Monarch 3.875 x 7.5 in","value":"37"}
+    "optionValue":{"text":"6 3/4 Envelope 3 5/8 x 6 1/2 in","value":"38"}
+    "optionValue":{"text":"US Std Fanflod 14 7/8 x 11 in","value":"39"}
+    "optionValue":{"text":"German Std Fanfold 8 1/2 x 12 in","value":"40"}
+    "optionValue":{"text":"German Legal Fanfold 8 1/2 x 13 in","value":"41"}
+    "optionValue":{"text":"B4 (ISO) 250 x 353 mm","value":"42"}
+    "optionValue":{"text":"Japanese Postcard 100 x 148 mm","value":"43"}
+    "optionValue":{"text":"9 x 11 in","value":"44"}
+    "optionValue":{"text":"10 x 11 in","value":"45"}
+    "optionValue":{"text":"15 x 11 in","value":"46"}
+    "optionValue":{"text":"Envelop invite 220 x 220 mm","value":"47"}
+    "optionValue":{"text":"RESERVED--DO NOT USE","value":"48"}
+    "optionValue":{"text":"RESERVED--DO NOT USE","value":"49"}
+    "optionValue":{"text":"Letter Extra 9 \275 x 12 in","value":"50"}
+    "optionValue":{"text":"Legal Extra 11.69 x 15 in","value":"51"}
+    "optionValue":{"text":"Tabloid Extra 11.69 x 18 in","value":"52"}
+    "optionValue":{"text":"A4 Extra 9.27 x 12.69 in","value":"53"}
+    "optionValue":{"text":"Letter Transverse 9 \275 x 11 in","value":"54"}
+    "optionValue":{"text":"A4 trasverse 210 x 297 mm","value":"55"}
+    "optionValue":{"text":"Letter Extra Transverse 9 \275 x 12 in","value":"56"}
+    "optionValue":{"text":"SuperA/SuperA/A4 227 x 356 mm","value":"57"}
+    "optionValue":{"text":"SuperB/SuperB/A3 305 x 487 mm","value":"58"}
+    "optionValue":{"text":"Letter Plus 8.5 x 12.69 in","value":"59"}
+    "optionValue":{"text":"A4 Plus 210 x 330 mm","value":"60"}
+    "optionValue":{"text":"A5 transverse 148 x 210 mm","value":"61"}
+    "optionValue":{"text":"B5 (JIS) transverse 182 x 257 mm","value":"62"}
+    "optionValue":{"text":"A3 Extra 322 x 445 mm","value":"63"}
+    "optionValue":{"text":"A5 Extra 174 x 235 mm","value":"64"}
+    "optionValue":{"text":"B5 (ISO) Extra 201 x 276 mm","value":"65"}
+    "optionValue":{"text":"A2 420 x 594 mm","value":"66"}
+    "optionValue":{"text":"A3 transverse 297 x 420 mm","value":"67"}
+    "optionValue":{"text":"A3 Extra Transverse 322 x 445 mm","value":"68"}
+    "optionValue":{"text":"Japanese Double Postcard 200 x 148 mm","value":"69"}
+    "optionValue":{"text":"A6 105 x 148 mm","value":"70"}
+    "optionValue":{"text":"Japanese Envelope Kaku #2","value":"71"}
+    "optionValue":{"text":"Japanese Envelope KAku #3","value":"72"}
+    "optionValue":{"text":"Japanese Envelope Kaku #3","value":"73"}
+    "optionValue":{"text":"Japanese Envelope Kaku #4","value":"74"}
+    "optionValue":{"text":"Letter Rotated 11 x 8 1/2 11 in","value":"7"}
+    "optionValue":{"text":"A3 Rotated 420 x 297 mm","value":"76"}
+    "optionValue":{"text":"A4 Rotated 297 x 210 mm","value":"77"}
+    "optionValue":{"text":"A5 Rotated 210 x 148 mm","value":"78"}
+    "optionValue":{"text":"B4 (JIS) Rotated 364 x 257 mm","value":"79"}
+    "optionValue":{"text":"B5 (JIS) Rotated 257 x 182 mm","value":"80"}
+    "optionValue":{"text":"Japanese Postcard Rotated 148 x 100 mm","value":"81"}
+    "optionValue":{"text":"Double Japanese Postcard Rotated 148 x 100 mm","value":"82"}
+    "optionValue":{"text":"A6 Rotated 148 x 105 mm","value":"83"}
+    "optionValue":{"text":"Japanese Envelope Kaku #2 Rotated","value":"84"}
+    "optionValue":{"text":"Japanese Envelope Kaku #3 Rotated","value":"85"}
+    "optionValue":{"text":"Japanese Envelope Chou #3 rotated","value":"86"}
+    "optionValue":{"text":"Japanese Envelope Chou #4 Rotated","value":"87"}
+    "optionValue":{"text":"B6 (JIS) 128 x 182 mm","value":"88"}
+    "optionValue":{"text":"B6 (JIS) rotated 182 x 128 mm","value":"89"}
+    "optionValue":{"text":"12 x 11 in","value":"90"}
+    "optionValue":{"text":"Japanese envelope You #4","value":"91"}
+    "optionValue":{"text":"Japanese Envelope You #4 Rotated","value":"92"}
+    "optionValue":{"text":"PRC 16 k 146 x 215 mm","value":"93"}
+    "optionValue":{"text":"PRC 32k 97 x 151 mm","value":"94"}
+    "optionValue":{"text":"PRC 32 k (Big) 97 x 151 mm","value":"95"}
+    "optionValue":{"text":"PRC Envelope #1 102 x 165 mm","value":"96"}
+    "optionValue":{"text":"PRC Envelope #2 102 x 176 mm","value":"97"}
+    "optionValue":{"text":"PRC Envelope #3 125 x 176 mm","value":"98"}
+    "optionValue":{"text":"PRC Envelope #4 110 x 208 mm","value":"99"}
+    "optionValue":{"text":"PRC Envelope #5 110 x 220 mm","value":"100"}
+    "optionValue":{"text":"PRC Envelope #6 120 x 230 mm","value":"101"}
+    "optionValue":{"text":"PRC Envelope #7 160 x 230 mm","value":"102"}
+    "optionValue":{"text":"PRC Envelope #8 120 x 309 mm","value":"103"}
+    "optionValue":{"text":"PRC Envelope #9 229 x 324 mm","value":"104"}
+    "optionValue":{"text":"PRC envelope #10 324 x 458 mm","value":"105"}
+    "optionValue":{"text":"PRC 16k Rotated","value":"106"}
+    "optionValue":{"text":"PRC 32k Rotated","value":"107"}
+    "optionValue":{"text":"PRC 32k(Big) Rotated","value":"108"}
+    "optionValue":{"text":"PRC Envelope #1 Rotated 165 x 102 mm","value":"109"}
+    "optionValue":{"text":"PRC Envelope #2 Rotated 176 x 102 mm","value":"110"}
+    "optionValue":{"text":"PRC Envelope #3 Rotated 176 x 125 mm","value":"111"}
+    "optionValue":{"text":"PRC Envelope #4 Rotated 208 x 110 mm","value":"112"}
+    "optionValue":{"text":"PRC Envelope #5 Rotated 220 x 110 mm","value":"113"}
+    "optionValue":{"text":"PRC Envelope #6 Rotated 230 x 120 mm","value":"114"}
+    "optionValue":{"text":"PRC Envelope #7 Rotated 230 x 160 mm","value":"115"}
+    "optionValue":{"text":"PRC Envelope #8 Rotated 309 x 120 mm","value":"116"}
+    "optionValue":{"text":"PRC Envelope #9 Rotated 324 x 229 mm","value":"117"}
+    "optionValue":{"text":"PRC Envelope #10 Rotated 458 x 324 mm","value":"118"}
+    "optionValue":{"text":"User-Defined","value":"256"}
+    "optionValue":{"text":"A0 840 x 1188 mm","value":"500"}
+    "optionValue":{"text":"A1 594 x 840 mm","value":"501"}
+
+    "property":{"text":"360Title","value":1}, (campo Título a ser mapeadoo campo "value" é a posição dele na lista)
+    "property":{"text":"360PrintApplication","value":2} (Campo: "Aplicativo", o campo "value" é a posição dele na lista)
+    "property":{"text":"360TotalPages","value":3} (Campo: "Total de Páginas", o campo "value" é a posição dele na lista)
+    "property":{"text":"360Duplex","value":5} (campo "Duplex", o campo "value" é a posição dele na lista)
+    "property":{"text":"360FilterColor","value":6} (campo "Cor", o campo "value" é a posição dele na lista)
+    "property":{"text":"360FilterPaperSize","value":7}
+
+    "logicalOperator":{"text":"360None","value":0} (Utilizado para quando não há mais filtros combinando, o campo "value" é a posição dele na lista)
+    "logicalOperator":{"text":"360And","value":1} (operador lógico "e", o campo "value" é a posição dele na lista)
+    "logicalOperator":{"text":"360Or","value":2}} (operador lógico "ou", o campo "value" é a posição dele na lista)
+
+filters":[{"value":{"optionValue":{"text":"360Undefined","value":"0"}},"property":{"text":"360PrintApplication","value":2},"operator":{"text":"360Equals","value":2},"logicalOperator":{"text":"360None","value":0}}],"applyToAll":true}
+
+"applyToAll":true (Lista de membros aos quais esta política se aplica. São permitidos usuários, impressoras e/ou seus grupos. É possível ainda incluir um usuário em uma impressora específica)
+"applyToAll":false,"members":[{"userId":1027,"name":"lucas.santini","description":"NDDIGITAL\\lucas.santini","memberType":1}]}
+Parâmetros políticas:
+----------------------------------------------------------------------------------------
