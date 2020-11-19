@@ -206,6 +206,20 @@ Filtros:
     "optionValue":{"text":"User-Defined","value":"256"}
     "optionValue":{"text":"A0 840 x 1188 mm","value":"500"}
     "optionValue":{"text":"A1 594 x 840 mm","value":"501"}
+    "optionValue":{"text":"360Sunday","value":"0"}
+    "optionValue":{"text":"360Monday","value":"1"}
+    "optionValue":{"text":"360Tuesday","value":"2"}
+    "optionValue":{"text":"360Wednesday","value":"3"}
+    "optionValue":{"text":"360Thursday","value":"4"}
+    "optionValue":{"text":"360Friday","value":"5"}
+    "optionValue":{"text":"360Saturday","value":"6"}
+    "optionValue":{"text":"360PrintQualityHigh","value":"-4"}
+    "optionValue":{"text":"360PrintQualityAverage","value":"-3"}
+    "optionValue":{"text":"360PrintQualityLow","value":"-2"}
+    "optionValue":{"text":"360PrintQualityDraft","value":"-1"}
+    "optionValue":{"text":"0 dpi","value":"0"}
+    "optionValue":{"text":"96 dpi","value":"96"}
+    "optionValue":{"text":"1200 dpi","value":"1200"}
 
     "property":{"text":"360Title","value":1}, (campo Título a ser mapeadoo campo "value" é a posição dele na lista)
     "property":{"text":"360PrintApplication","value":2} (Campo: "Aplicativo", o campo "value" é a posição dele na lista)
@@ -213,14 +227,37 @@ Filtros:
     "property":{"text":"360Duplex","value":5} (campo "Duplex", o campo "value" é a posição dele na lista)
     "property":{"text":"360FilterColor","value":6} (campo "Cor", o campo "value" é a posição dele na lista)
     "property":{"text":"360FilterPaperSize","value":7}
+    "property":{"text":"360PrintQuality","value":8}
+    "property":{"text":"360Time","value":9}
+    "property":{"text":"360SpoolSize","value":10} (utilizar: campo Value para o valor --> "value":{"simpleValue":0.258})
+    "property":{"text":"360CostValue","value":11} (utilizar: campo Value para o valor --> "value":{"simpleValue":0.258})
+    "property":{"text":"360DayOfWeek","value":12}
+
+    "intervalValue":{"initialText":"","finalText":"","initialValueTime":"2020-11-18T04:01:00.000Z","initialValue":"01:01","finalValueTime":"2020-11-18T05:02:00.000Z","finalValue":"02:02"}
 
     "logicalOperator":{"text":"360None","value":0} (Utilizado para quando não há mais filtros combinando, o campo "value" é a posição dele na lista)
     "logicalOperator":{"text":"360And","value":1} (operador lógico "e", o campo "value" é a posição dele na lista)
-    "logicalOperator":{"text":"360Or","value":2}} (operador lógico "ou", o campo "value" é a posição dele na lista)
-
-filters":[{"value":{"optionValue":{"text":"360Undefined","value":"0"}},"property":{"text":"360PrintApplication","value":2},"operator":{"text":"360Equals","value":2},"logicalOperator":{"text":"360None","value":0}}],"applyToAll":true}
+    "logicalOperator":{"text":"360Or","value":2} (operador lógico "ou", o campo "value" é a posição dele na lista)
 
 "applyToAll":true (Lista de membros aos quais esta política se aplica. São permitidos usuários, impressoras e/ou seus grupos. É possível ainda incluir um usuário em uma impressora específica)
 "applyToAll":false,"members":[{"userId":1027,"name":"lucas.santini","description":"NDDIGITAL\\lucas.santini","memberType":1}]}
-Parâmetros políticas:
-----------------------------------------------------------------------------------------
+
+
+
+Exemplos de politicas:
+{"policyName":"converter para mono - sugestao - sem filtros","policyType":0,"jobType":1,"behaviorType":6,"enabled":true,"notify":null,"customNotificationMessage":"RestriÃ§Ã£o de impressÃ£o.","useDefaultNotificationMessage":true,"convertBehaviorValue":2,"filters":[],"applyToAll":true}
+
+{"policyName":"titulo contem teste 1","policyType":0,"jobType":1,"behaviorType":0,"enabled":true,"notify":null,"customNotificationMessage":"RestriÃ§Ã£o de impressÃ£o.","useDefaultNotificationMessage":true,"filters":[{"value":{"simpleValue":"teste1"},"property":{"text":"360Title","value":1},"operator":{"text":"360Contains","value":1},"logicalOperator":{"text":"360None","value":0}}],"applyToAll":true}
+
+{"policyName":"titulo contem teste1 e Aplicativo igual Mic Word","policyType":0,"jobType":1,"behaviorType":0,"enabled":true,"notify":null,"customNotificationMessage":"RestriÃ§Ã£o de impressÃ£o.","useDefaultNotificationMessage":true,"filters":[{"value":{"simpleValue":"teste1"},"property":{"text":"360Title","value":1},"operator":{"text":"360Contains","value":1},"logicalOperator":{"text":"360None","value":0}},{"value":{"optionValue":{"text":"Microsoft Word","value":"1"}},"property":{"text":"360PrintApplication","value":2},"operator":{"text":"360Equals","value":2},"logicalOperator":{"text":"360And","value":1}}],"applyToAll":true}
+
+{"policyName":"qualidade igual 1200 dpi","policyType":0,"jobType":1,"behaviorType":0,"enabled":true,"notify":null,"customNotificationMessage":"RestriÃ§Ã£o de impressÃ£o.","useDefaultNotificationMessage":true,"filters":[{"value":{"optionValue":{"text":"1200 dpi","value":"1200"}},"property":{"text":"360PrintQuality","value":8},"operator":{"text":"360Equals","value":2},"logicalOperator":{"text":"360None","value":0}}],"applyToAll":true}
+
+{"policyName":"horario intervalo 1 01 atÃ© 02 02","policyType":0,"jobType":1,"behaviorType":0,"enabled":true,"notify":null,"customNotificationMessage":"RestriÃ§Ã£o de impressÃ£o.","useDefaultNotificationMessage":true,"filters":[{"value":{"intervalValue":{"initialText":"","finalText":"","initialValueTime":"2020-11-18T04:01:00.000Z","initialValue":"01:01","finalValueTime":"2020-11-18T05:02:00.000Z","finalValue":"02:02"}},"property":{"text":"360Time","value":9},"operator":{"text":"360Interval","value":8},"logicalOperator":{"text":"360None","value":0}}],"applyToAll":true}
+
+{"policyName":"amanho do arquivo menor que 128 bytes","policyType":0,"jobType":1,"behaviorType":0,"enabled":true,"notify":null,"customNotificationMessage":"RestriÃ§Ã£o de impressÃ£o.","useDefaultNotificationMessage":true,"filters":[{"value":{"simpleValue":128},"property":{"text":"360SpoolSize","value":10},"operator":{"text":"360LessThan","value":6},"logicalOperator":{"text":"360None","value":0}}],"applyToAll":true}
+
+{"policyName":"custo maior que ou igual a 0 258","policyType":0,"jobType":1,"behaviorType":0,"enabled":true,"notify":null,"customNotificationMessage":"RestriÃ§Ã£o de impressÃ£o.","useDefaultNotificationMessage":true,"filters":[{"value":{"simpleValue":0.258},"property":{"text":"360CostValue","value":11},"operator":{"text":"360GreaterThanOrEqual","value":5},"logicalOperator":{"text":"360None","value":0}}],"applyToAll":true}
+
+{"policyName":"dia da semana diferente segunda-feira","policyType":0,"jobType":1,"behaviorType":0,"enabled":true,"notify":null,"customNotificationMessage":"RestriÃ§Ã£o de impressÃ£o.","useDefaultNotificationMessage":true,"filters":[{"value":{"optionValue":{"text":"360Monday","value":"1"}},"property":{"text":"360DayOfWeek","value":12},"operator":{"text":"360Different","value":3},"logicalOperator":{"text":"360None","value":0}}],"applyToAll":true}
+
